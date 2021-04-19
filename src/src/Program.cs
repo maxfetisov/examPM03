@@ -67,5 +67,15 @@ namespace src
                 }
             }
         }
+        public bool compareApps(App a, App b)
+        {
+            for(int i = 0; i < (a.Producer.Length < b.Producer.Length?a.Producer.Length:b.Producer.Length); i++)
+            {
+                if (a.Producer.ToCharArray()[i] > b.Producer.ToCharArray()[i]) return true;
+                if (a.Producer.ToCharArray()[i] < b.Producer.ToCharArray()[i]) return false;
+            }
+            if (a.Price > b.Price) return true;
+            else return false;
+        }
     }
 }
