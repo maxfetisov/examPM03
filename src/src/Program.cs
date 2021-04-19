@@ -40,7 +40,7 @@ namespace src
             Console.WriteLine("Массив после сортировки:");
             foreach (App item in apps)
                 Console.WriteLine(item.ToString());
-            saveInFile(apps);
+            saveInFile(apps, "apps.txt");
         }
         public void fillApps(App[] apps)
         {
@@ -109,11 +109,11 @@ namespace src
                 }
             }
         }
-        public void saveInFile(App[] apps)
+        public void saveInFile(App[] apps, string path)
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter("apps.txt"))
+                using (StreamWriter sw = new StreamWriter(path))
                 {
                     foreach (App item in apps)
                         sw.WriteLine(item.ToString());
