@@ -10,6 +10,12 @@ namespace src
     {
         static void Main(string[] args)
         {
+            Program program = new Program();
+            program.start();
+            Console.ReadKey();
+        }
+        public void start()
+        {
             int n;
             while (true)
             {
@@ -19,18 +25,27 @@ namespace src
                     n = Convert.ToInt32(Console.ReadLine());
                     break;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine("Введено некорректное значение: " + ex.Message);
                 }
             }
             App[] apps = new App[n];
+            fillApps(apps);
+            Console.WriteLine("Массив до сортировки:");
+            foreach(App item in apps)
+                Console.WriteLine(item.ToString());
+            sortApps(apps);
+            Console.WriteLine("Массив после сортировки:");
+            foreach (App item in apps)
+                Console.WriteLine(item.ToString());
         }
-        private void fillApps(App[] apps)
+        public void fillApps(App[] apps)
         {
             for(int i = 0; i < apps.Length; i++)
             {
-                Console.WriteLine($"Введите наименование программы {i+1}: ");
+                apps[i] = new App();
+                Console.Write($"Введите наименование программы {i+1}: ");
                 string stmp = Console.ReadLine();
                 if (!string.IsNullOrEmpty(stmp))
                 {
@@ -42,7 +57,7 @@ namespace src
                     i--;
                     continue;
                 }
-                Console.WriteLine($"Введите производителя программы {i + 1}: ");
+                Console.Write($"Введите производителя программы {i + 1}: ");
                 stmp = Console.ReadLine();
                 if (!string.IsNullOrEmpty(stmp))
                 {
@@ -54,7 +69,7 @@ namespace src
                     i--;
                     continue;
                 }
-                Console.WriteLine($"Введите цену программы {i + 1}: ");
+                Console.Write($"Введите цену программы {i + 1}: ");
                 try
                 {
                     apps[i].Price = Convert.ToDouble(Console.ReadLine());
@@ -81,11 +96,14 @@ namespace src
         {
             for(int i = 0; i < apps.Length - 1; i++)
             {
-                if(!compareApps(apps[i], apps[i + 1]))
+                for(int j = i; j < apps.Length - 1; j++)
                 {
-                    App tmp = apps[i];
-                    apps[i] = apps[i + 1];
-                    apps[i + 1] = tmp;
+                    if (!compareApps(apps[j], apps[j + 1]))
+                    {
+                        App tmp = apps[i];
+                        apps[i] = apps[j + 1];
+                        apps[j + 1] = tmp;
+                    }
                 }
             }
         }
