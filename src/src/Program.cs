@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace src
             Console.WriteLine("Массив после сортировки:");
             foreach (App item in apps)
                 Console.WriteLine(item.ToString());
+            saveInFile(apps);
         }
         public void fillApps(App[] apps)
         {
@@ -98,13 +100,29 @@ namespace src
             {
                 for(int j = i; j < apps.Length - 1; j++)
                 {
-                    if (!compareApps(apps[j], apps[j + 1]))
+                    if (!compareApps(apps[i], apps[j + 1]))
                     {
                         App tmp = apps[i];
                         apps[i] = apps[j + 1];
                         apps[j + 1] = tmp;
                     }
                 }
+            }
+        }
+        public void saveInFile(App[] apps)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter("apps.txt"))
+                {
+                    foreach (App item in apps)
+                        sw.WriteLine(item.ToString());
+                }
+                Console.WriteLine("Успешное сохранение");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Во время сохранения произошла ошибка: " + ex.Message);
             }
         }
     }
