@@ -77,5 +77,17 @@ namespace src
             if (a.Price > b.Price) return true;
             else return false;
         }
+        public void sortApps(App[] apps)
+        {
+            for(int i = 0; i < apps.Length - 1; i++)
+            {
+                if(!compareApps(apps[i], apps[i + 1]))
+                {
+                    App tmp = apps[i];
+                    apps[i] = apps[i + 1];
+                    apps[i + 1] = tmp;
+                }
+            }
+        }
     }
 }
