@@ -34,9 +34,10 @@ namespace src
             App[] apps = new App[n];
             fillApps(apps);
             Console.WriteLine("Массив до сортировки:");
-            foreach(App item in apps)
+            foreach (App item in apps)
                 Console.WriteLine(item.ToString());
-            sortApps(apps);
+            if (apps.Length > 1) 
+                sortApps(apps);
             Console.WriteLine("Массив после сортировки:");
             foreach (App item in apps)
                 Console.WriteLine(item.ToString());
